@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    container_name: ph31
+    ports:
+      - "80:80"
+    volumes:
+      - ../src:/var/www/html
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: ph31db
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: ph31_db
+      MYSQL_USER: user
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: ph31MyAdmin
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: ''
+    ports:
+      - "81:80"
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+
