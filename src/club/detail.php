@@ -1,7 +1,6 @@
 <?php
 require_once('./src/db.php');
 $studentId = $_GET["id"];
-require_once('./src/db.php');
 $link = mysqli_connect('db', 'root', '', 'ph31_db');
 
 $query = "SELECT
